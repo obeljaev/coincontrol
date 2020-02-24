@@ -5,30 +5,32 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.iambelyaev.coincontrolserver.restapi.model.Category;
-import ru.iambelyaev.coincontrolserver.restapi.service.CategoryService;
+import ru.iambelyaev.coincontrolserver.restapi.model.User;
+import ru.iambelyaev.coincontrolserver.restapi.service.UserService;
 
 import java.util.List;
 
 @RestController
-public class CategoryController {
-    private final CategoryService CategoryService;
+public class UserController {
+    private final UserService UserService;
 
     @Autowired
-    public CategoryController(CategoryService CategoryService) {
-        this.CategoryService = CategoryService;
+    public UserController(UserService UserService) {
+        this.UserService = UserService;
     }
 
-    @PostMapping(value = "/Category")
-    public ResponseEntity<?> create(@RequestBody Category Category) {
-        CategoryService.create(Category);
+    @PostMapping(value = "/User")
+    public ResponseEntity<?> create(@RequestBody User User) {
+        System.out.println("@post /User");
+        UserService.create(User);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/Category")
-    public ResponseEntity<List<Category>> read() {
-        final List<Category> Category = CategoryService.readAll();
-        return Category != null && !Category.isEmpty()
-                ? new ResponseEntity<>(Category, HttpStatus.OK)
+    @GetMapping(value = "/User")
+    public ResponseEntity<List<User>> read() {
+        final List<User> User = UserService.readAll();
+        return User != null && !User.isEmpty()
+                ? new ResponseEntity<>(User, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

@@ -1,37 +1,37 @@
 package ru.iambelyaev.coincontrolserver.restapi.service;
 
-import ru.iambelyaev.coincontrolserver.restapi.model.Category;
+import ru.iambelyaev.coincontrolserver.restapi.model.User;
 
 import java.util.List;
 
-public interface CategoryService {
+public interface UserService {
     /**
      * Создает новую категорию
-     * @param Category - категория для создания
+     * @param User - категория для создания
      */
-    void create(Category Category);
+    void create(User User);
 
     /**
      * Возвращает список всех имеющихся категорий
      * @return список категорий
      */
-    List<Category> readAll();
+    List<User> readAll();
 
     /**
      * Возвращает категорию по его ID
      * @param id - ID клиента
      * @return - объект клиента с заданным ID
      */
-//    Category read(int id);
+//    User read(int id);
 
     /**
      * Обновляет клиента с заданным ID,
      * в соответствии с переданным клиентом
-     * @param Category - клиент в соответсвии с которым нужно обновить данные
+     * @param User - клиент в соответсвии с которым нужно обновить данные
      * @param id - id клиента которого нужно обновить
      * @return - true если данные были обновлены, иначе false
      */
-//    boolean update(Category Category, int id);
+//    boolean update(User User, int id);
 
     /**
      * Удаляет клиента с заданным ID

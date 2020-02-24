@@ -1,7 +1,7 @@
 package ru.iambelyaev.coincontrolserver.restapi.service;
 
 import org.springframework.stereotype.Service;
-import ru.iambelyaev.coincontrolserver.restapi.model.Category;
+import ru.iambelyaev.coincontrolserver.restapi.model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,11 +15,12 @@ import java.io.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class UserServiceImpl implements UserService {
     @Override
-    public void create(Category Category) {
+    public void create(User User) {
+        System.out.println("UserService::create");
         String hostname = "localhost";
-        int port = 30001;
+        int port = 30000;
         StringBuilder data = new StringBuilder();
         try (Socket socket = new Socket(hostname, port)) {
             OutputStream output = socket.getOutputStream();
@@ -29,7 +30,7 @@ public class CategoryServiceImpl implements CategoryService {
 
             ObjectMapper objectMapper = new ObjectMapper();
 
-            String json = objectMapper.writeValueAsString(Category);
+            String json = objectMapper.writeValueAsString(User);
             System.out.println(json);
             writer.write("post");
             writer.write(json);
@@ -42,13 +43,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> readAll() {
+    public List<User> readAll() {
         System.out.println("+1");
         String hostname = "localhost";
-        int port = 30001;
+        int port = 30000;
         StringBuilder data = new StringBuilder();
 
-        ArrayList<Category> list = new ArrayList<>();
+        ArrayList<User> list = new ArrayList<>();
         try (Socket socket = new Socket(hostname, port)) {
             System.out.println("+2");
             OutputStream output = socket.getOutputStream();
@@ -73,15 +74,16 @@ public class CategoryServiceImpl implements CategoryService {
 //            list.add(_category);
 //            list.add(_category);
             System.out.println(list.size());
-            Category[] _category = objectMapper.readValue(data.toString(), Category[].class);
-            System.out.println(_category.length);
-//            for (int i = 0; i <= _category.length; i++) {
-//                System.out.println(i);
-//                System.out.println(_category[i].getCategoryName());
-//                list.add(_category[i]);
-//            }
-            list.add(_category[0]);
-            list.add(_category[1]);
+            User[] _user = objectMapper.readValue(data.toString(), User[].class);
+            System.out.println(_user.length);
+            //for (int i = 0; i < _user.length; i++) {
+            for (User i:
+                    _user) {
+                System.out.println(i.getUserName());
+                list.add(i);
+            }
+//            list.add(_category[0]);
+//            list.add(_category[1]);
             System.out.println("++++");
             System.out.println(list.size());
             //System.out.println(_category.getCategoryName());
